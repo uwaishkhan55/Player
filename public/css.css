@@ -76,11 +76,9 @@ box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
 transform: scale(1.05);
 }
 .card-title{
-<<<<<<< HEAD
-    font-size: 11px;
-=======
+
     font-size: 14px;
->>>>>>> 36f2a57... video---
+
 }
 
 body,html{
@@ -133,14 +131,7 @@ body,html{
     border-radius: 50%;
     color:white;
     }
-<<<<<<< HEAD
 
-    #loading{
-      display: block;
-      margin: 10vh auto;
-      width: 25%;
-    }
-=======
     /* Loading part css */
     #loading{
         display: block;
@@ -172,4 +163,4 @@ body,html{
         border: 0px;
        
     }
->>>>>>> 36f2a57... video---
+

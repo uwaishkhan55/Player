@@ -25,30 +25,7 @@ app.get('/download',(req,res)=>{
   }))
 })
 
-  const accountSid = 'AC74e82410895a9bce6d1692560856ea88';
-const authToken = '2c5d388443ebdab838aa41167a25ac59';
-const client = require('twilio')(accountSid, authToken);
-  app.get('/dd',async (req,res)=>{
-    let body=req.body.Body
-    let str=""
-    await search(body.split("'")[0], {
-      limit :20,
-      type : "video"
-    }).then(function(results){
-      let a=1;
-      results.forEach(element => {
-       str+= (a++)+"."+element.title+"\n"
-      });
-  
-      })
-    client.messages
-    .create({
-       from: 'whatsapp:+14155238886',
-       body: str,
-       to: req.body.From
-     })
-    .then(message => console.log(message.sid));
-  })
+
  
  
 console.log(port)
