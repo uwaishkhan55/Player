@@ -1,0 +1,47 @@
+{
+  "name": "musicplayer",
+  "version": "1.0.0",
+<<<<<<< HEAD
+=======
+  "description": "",
+>>>>>>> 36f2a57... video---
+  "main": "server.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "git": "^0.1.5",
+    "googleapis": "^42.0.0",
+    "lame": "^1.2.4",
+    "node-gyp": "^5.0.3",
+    "node-lame": "^1.2.0",
+    "request": "^2.88.0",
+    "scrape-youtube": "0.0.5",
+    "twilio": "^3.33.3",
+    "youtube-audio-stream": "^0.3.1",
+    "youtube-dl": "^2.0.0",
+    "youtube-search": "^1.1.4",
+    "youtube-v3-api": "^1.1.1",
+    "ytdl-core": "^0.29.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uwaishkhan55/MusicPlayer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uwaishkhan55/MusicPlayer/issues"
+  },
+<<<<<<< HEAD
+  "homepage": "https://github.com/uwaishkhan55/MusicPlayer#readme",
+  "description": ""
+=======
+  "homepage": "https://github.com/uwaishkhan55/MusicPlayer#readme"
+>>>>>>> 36f2a57... video---
+}

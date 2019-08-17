@@ -1,0 +1,175 @@
+*{
+    padding: 0;
+    margin: 0;
+    
+   
+}
+#search{
+    padding: 0;
+    width: 50%;
+    margin: 0 auto;
+    
+}
+#card{
+    width: 200px;
+    height:auto; 
+  
+    margin: 20px;
+}
+#cardimg{
+    width:200px;
+    height: width*9/16;
+}
+button:hover {
+    background-color: RoyalBlue;
+    transition: 1000ms;
+  }
+ 
+
+
+
+
+#navbar{
+    height: 80px;
+    color: aliceblue;
+    background-color: rgb(4, 1, 34)
+}
+#result{
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    margin: 0 auto;
+    padding: 60px;
+}
+.card{
+    border-radius: 40px 70px 0 0;
+    -webkit-box-shadow: 21px 28px 39px 0px rgba(0,0,0,0.48);
+-moz-box-shadow: 21px 28px 39px 0px rgba(0,0,0,0.48);
+box-shadow: 21px 28px 39px 0px rgba(0,0,0,0.48);
+    
+}
+
+#b2{
+    width: 120px;
+    height: 40px;
+    margin: 5px;
+}
+#player{
+    height: 50px;
+    width: 95%;
+    position: fixed; 
+    bottom:0%;
+    margin: 10px;
+    z-index: 1;
+    display: none;
+
+}
+
+audio:hover, audio:focus, audio:active
+{
+-webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+-webkit-transform: scale(1.05);
+-moz-transform: scale(1.05);
+transform: scale(1.05);
+}
+.card-title{
+<<<<<<< HEAD
+    font-size: 11px;
+=======
+    font-size: 14px;
+>>>>>>> 36f2a57... video---
+}
+
+body,html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #e74c3c !important;
+    }
+
+    .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 50vw;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    }
+<<<<<<< HEAD
+
+    #loading{
+      display: block;
+      margin: 10vh auto;
+      width: 25%;
+    }
+=======
+    /* Loading part css */
+    #loading{
+        display: block;
+        width: 30%;
+        margin: 10vh auto;
+
+    }
+    /* Overlay effect */
+    .overlay{
+        background-color: aquamarine;
+        width: 100%;
+        height: 100%;
+        opacity: 0.7;
+    }
+    #cross{
+           width: 20vw;
+           height: 10vh;
+           position: fixed;
+           top: 0px;
+           right:0px;
+    }
+    /* Video-player */
+    #video-player{
+        position: fixed;
+        bottom: 5vh;
+        right: 5vw;
+        z-index: 999;
+        outline: 0;
+        border: 0px;
+       
+    }
+>>>>>>> 36f2a57... video---
