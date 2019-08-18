@@ -4,6 +4,7 @@ $(()=>{
   //get request from the youtube and fill the page with videos .
   $('#b1').click(()=>
   {
+   
      $('#loading').show()
 
      $.get('/search',$('#i1').val(),async (x)=>{
@@ -49,7 +50,7 @@ $(()=>{
   $(document).on('click',"#b2",function(ev){
 
       console.log($(this).attr('link'))
-
+       $(this).css("background-color", "yellow");
        $.get('/download',$(this).attr('link'),async (x)=>{
          x=await x;
          let mp4=x.formats[0].url ;
@@ -81,6 +82,7 @@ $(()=>{
           `)
 
        })
+       $(this).css("background-color", "blue");
   }); 
 
 
@@ -94,6 +96,7 @@ $(document).on('click','#b2-videoplayer' ,((ev)=>{
       Your browser does not support the video tag.
       </video>
         `)
+        $(ev.currentTarget).css("background-color", "blue");
 }))
 
 
