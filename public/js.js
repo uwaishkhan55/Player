@@ -1,6 +1,6 @@
 $(()=>{
   //fill trending songs
-  $.get('/search',"new boolywood song",async (x)=>{
+  $.get('/search',"new song",async (x)=>{
     $('#loading').hide()
         $('#result').empty()
         
