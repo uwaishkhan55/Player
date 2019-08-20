@@ -135,8 +135,8 @@ body,html{
     /* Loading part css */
     #loading{
       
+        
         display: block;
-        display: none;
         width: 30%;
         margin: 10vh auto;
 

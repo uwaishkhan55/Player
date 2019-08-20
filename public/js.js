@@ -24,10 +24,7 @@ $(()=>{
 
   //get request from the youtube and fill the page with videos .
   $('#b1').click(()=>
-  {
-   
-     $('#loading').css('display','block')
-
+  { $('#loading').show()
      $.get('/search',$('#i1').val(),async (x)=>{
       $('#loading').hide()
           $('#result').empty()
@@ -49,7 +46,7 @@ $(()=>{
      }
       
      })
-  })
+ })
 
 // triger Submit button when Hit enter By the user.
  $('input').on('keyup',((ev)=>{
