@@ -1,17 +1,38 @@
 $(()=>{
-  $('#loading').hide()
+  //fill trending songs
+  $.get('/search',"new boolywood song",async (x)=>{
+    $('#loading').hide()
+        $('#result').empty()
+        
+        let str=""
+        for(let z of x){
+          str+=`  <div class="card" id="card" >\
+          <img class="card-img-top" id="cardimg" src="${z.thumbnail}">\
+          <div class="card-body">\
+            <h4 class="card-title">${z.title}</h4>\
+           <button  link="${z.link}" class="btn btn-info " id="b2">Play</button> 
+          </div>`
+
+        $('#result')
+        .append(str)
+        str="";
+
+            
+   }
+    
+   })
 
   //get request from the youtube and fill the page with videos .
   $('#b1').click(()=>
   {
    
-     $('#loading').show()
+     $('#loading').css('display','block')
 
      $.get('/search',$('#i1').val(),async (x)=>{
-      
+      $('#loading').hide()
           $('#result').empty()
-          $('#loading').hide()
-           let str=""
+          
+          let str=""
           for(let z of x){
             str+=`  <div class="card" id="card" >\
             <img class="card-img-top" id="cardimg" src="${z.thumbnail}">\
