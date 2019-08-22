@@ -52,11 +52,14 @@ $(()=>{
  $('input').on('keyup',((ev)=>{
   $('#mySelect').empty()
   let a=0;
+  let str="";
+  str.sub(1,)
+
   $.get('/search',$('#i1').val(),(x)=>{
     for(let z of x){
       if(a++>5) break;
         $('#mySelect').append(`
-          <option value="${z.title}">\
+          <option value="${z.title.substr(0,20)}">\
         `)
     }
 })
