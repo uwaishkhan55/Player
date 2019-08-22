@@ -48,37 +48,43 @@ $(()=>{
      })
  })
 
-// triger Submit button when Hit enter By the user.
+// trigger Submit button when Hit enter By the user.
  $('input').on('keyup',((ev)=>{
-   $('#options').hide()
+  $('#mySelect').empty()
+  let a=0;
+  $.get('/search',$('#i1').val(),(x)=>{
+    for(let z of x){
+      if(a++>5) break;
+        $('#mySelect').append(`
+          <option value="${z.title}">\
+        `)
+    }
+})
     if(ev.key=="Enter"){
          $('#b1').click()
+         $('#mySelect').empty()
     }
-    // Autocomplete later i will add.
-    // $.get('/search',$('#i1').val(),(x)=>{
-    //     for(let z of x){
-    //         $('#options').append(`
-    //           <a href="#" > ${z.title}</a>
-    //         `)
-    //     }
-    // })
- }))
+    }))
+ $('input').on('change', function() {
+  var value = $(this).val();
+  $('#b1').click();
+});
+
 
 // fetech formats of video Quality.
-  $(document).on('click',"#b2",function(ev){
+  $(document).on('click',"#b2 ",function(ev){
 
-      console.log($(this).attr('link'))
        $(this).css("background-color", "yellow");
        $.get('/download',$(this).attr('link'),async (x)=>{
          x=await x;
          let mp4=x.formats[0].url ;
         
          let mp3;
-         console.log(x.formats)
+        
         let arrayofmp3 =x.formats.reverse()
         arrayofmp3.forEach(element => {  
             if(element.audioBitrate===160||element.audioBitrate===64||element.audioBitrate===128) {
-              console.log(element)
+              
               mp3=element.url;
               
             }
@@ -107,7 +113,6 @@ $(()=>{
 $(document).on('click','#b2-videoplayer' ,((ev)=>{
   $('#player').empty().hide()
   $('#video-player').empty().hide() 
-       console.log()
         $('#video-player').show().append(`
         <video width="320" height="240" autoplay="autoplay" controls>
         <source src=${$(ev.currentTarget).attr('link')} type="video/mp4">
