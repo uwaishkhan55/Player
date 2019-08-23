@@ -102,7 +102,7 @@ $(()=>{
           $('#video-player').empty().hide()
 
           $('#player').empty().show().append(`
-          <audio id="b2" style="width:95% ;height:50px" autoplay="autoplay" controls>
+          <audio id="b2" style="width:95% ;height:50px" download="mp3.mp3" autoplay="autoplay" controls>
           <source src=${mp3} type="audio/ogg">
           Your browser does not support the audio element.
            </audio> 

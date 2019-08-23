@@ -166,4 +166,8 @@ body,html{
        
     }
 
-/* footer */
+#title{
+    font-weight: bolder;
+    font-size: 25px;
+
+}
