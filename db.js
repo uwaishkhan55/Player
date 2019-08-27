@@ -8,10 +8,6 @@ const db = new Sequelize({
   storage: __dirname+'/tests2.db',
 })
 
-function generateMyId()
-{
-     return Math.floor(1000000000 + Math.random() * 900000000);
-}
 
 const User = db.define('user', {
   username:Sequelize.STRING(20),
@@ -21,17 +17,25 @@ const User = db.define('user', {
 })
 
 const History = db.define('history',{
-      data:Sequelize.STRING()
+      data:{
+       type: Sequelize.JSON()
+      },
+      guest_id:Sequelize.STRING(),
+      
+      
 })
 const Guest = db.define('guest', {
-  username:Sequelize.STRING(20),
+  id:{
+    type: Sequelize.STRING,
+    primaryKey: true,
+  }
 })
-Guest.hasMany(History);
+Guest.hasMany(History,{foreignKey: 'customer_id'});
 
 
 
 
-db.sync({force : true},()=>
+db.sync(()=>
 {
     console.log('working fine')
 })

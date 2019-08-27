@@ -112,13 +112,6 @@ $(()=>{
        $(this).css("background-color", "blue");
   }); 
 
-  
-  if(localStorage.length==0) {
-       alert("Welcome to the Music World.")
-       localStorage.mystorage=1;
-  }
-  alert("We are happy to see you again.")
-
 $(document).on('click','#b2-videoplayer' ,((ev)=>{
   $('#player').empty().hide()
   $('#video-player').empty().hide() 
