@@ -1,4 +1,11 @@
 $(()=>{
+
+
+  console.log("Guest"+document.cookie.split('|')[3].substring(0,5))
+  $("#guestName").text("Guest"+document.cookie.split('|')[3].substring(0,5))
+  
+
+
   //fill trending songs
   $.get('/search',"new song",async (x)=>{
     $('#loading').hide()
@@ -123,6 +130,14 @@ $(document).on('click','#b2-videoplayer' ,((ev)=>{
         `)
         $(ev.currentTarget).css("background-color", "blue");
 }))
+
+
+
+$("#getHistory").click(()=>{
+        $.get('/getHistory',(res)=>{
+             console.log(res)
+        })
+})
 
 
 

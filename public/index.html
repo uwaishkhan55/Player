@@ -17,6 +17,7 @@
 
 </head>
 <body>
+ 
     <div id="navbar">
        <a href="https://www.musicplayer55.herokuapp.com"> <div id="title" align="center" > Online Music Player </div></a>
         <div class="container h-100">
@@ -35,6 +36,29 @@
     <div id="player"></div>
     <div id="video-player"></div>
     <div id="result" class="container-fluid"></div>
+    <span id="menu" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <img  id="guestpic" src="https://img.pngio.com/profilepng-512512-profile-png-512_512.png" alt=""></a> 
+      <a id="guestName"  href=javascript:void(0)"></a>
+      <a href="#">Log in</a>
+      <a href="javascript:void(0)"  id="getHistory">History</a>
+
+     
+      
+    </div>
+    
+   
+    
+    <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "25vw";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
     
 
   

@@ -5,7 +5,7 @@ const db = new Sequelize({
   retry: {
     max: 10
   },
-  storage: __dirname+'/tests2.db',
+  storage: __dirname+'/tests.db',
 })
 
 
@@ -17,10 +17,10 @@ const User = db.define('user', {
 })
 
 const History = db.define('history',{
-      data:{
-       type: Sequelize.JSON()
-      },
       guest_id:Sequelize.STRING(),
+      url:Sequelize.STRING(),
+      image:Sequelize.STRING(),
+      name:Sequelize.STRING()
       
       
 })

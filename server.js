@@ -33,7 +33,7 @@ const fs = require('fs');
 const ytdl = require('ytdl-core');
 
 
-app.get('/sh',async (req,res)=>{
+app.get('/getHistory',async (req,res)=>{
   let guestId=""
   if(req.cookies.cookieName){
      guestId="Guest"+ req.cookies.cookieName.toString().substring(0,5)
@@ -64,25 +64,30 @@ app.get('/sh',async (req,res)=>{
 
 app.get('/download',async(req,res)=>{
   let url='www.youtube.com/watch?v='+req.url.split('=')[1];
-  
-  console.log(url)
-  console.log(req.cookies)
- 
-  ytdl.getInfo(url,  ( async(err,res1)=>{
+ ytdl.getInfo(url,  ( async(err,res1)=>{
     let res3=await res1; 
     let guestId=""
     if(req.cookies.cookieName){
        guestId="Guest"+ req.cookies.cookieName.toString().substring(0,5)
-    }
-    let item=await History.create({
-      data:res3,
-      guest_id: guestId
-});
-        res.send(res1);
-         
-  }))
+    }   
+           fill(res1,guestId);
+           res.send(res1);
+     }))
 })
+  async function fill(res3,guestId ){
+      let name = await  res3.player_response.videoDetails.title;
+      let url = await res3.video_url;
+      let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+      console.log(url)
 
+      let item = await History.create({
+             guest_id:guestId,
+              name:name,
+              url:url,
+              image:thumbnail
+      })
+      console.log(name+url+thumbnail)
+ }
 
  
  
