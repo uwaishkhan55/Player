@@ -18,7 +18,9 @@
 }
 #cardimg{
     width:200px;
-    height: width*9/16;
+    height: auto;
+    display: inline;
+    border-top-left-radius: 20px;
 }
 button:hover {
     background-color: RoyalBlue;
@@ -32,7 +34,8 @@ button:hover {
 #navbar{
     height: 80px;
     color: aliceblue;
-    background-color: rgb(4, 1, 34)
+    background-color: rgb(4, 1, 34);
+    
 }
 #result{
     margin: 0 auto;

@@ -78,15 +78,20 @@ app.get('/download',async(req,res)=>{
       let name = await  res3.player_response.videoDetails.title;
       let url = await res3.video_url;
       let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
-      console.log(url)
-
+     let item1 =await History.destroy({
+        where:{
+          url:url
+        }
+   })
+      
+    
       let item = await History.create({
              guest_id:guestId,
               name:name,
               url:url,
               image:thumbnail
       })
-      console.log(name+url+thumbnail)
+     
  }
 
  

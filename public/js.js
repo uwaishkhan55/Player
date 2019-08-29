@@ -1,8 +1,5 @@
 $(()=>{
 
-
-  console.log("Guest"+document.cookie.split('|')[3].substring(0,5))
-  $("#guestName").text("Guest"+document.cookie.split('|')[3].substring(0,5))
   
 
 
@@ -134,9 +131,29 @@ $(document).on('click','#b2-videoplayer' ,((ev)=>{
 
 
 $("#getHistory").click(()=>{
-        $.get('/getHistory',(res)=>{
-             console.log(res)
-        })
+  $('#result').hide()
+      $.get('/getHistory',(res)=>{
+           
+        let str=""
+        for(let z of res){
+          str+=`  <div class="card" id="card" >\
+          <img class="card-img-top" id="cardimg" src="" alt="problem">\
+          <div class="card-body">\
+            <h4 class="card-title">${z.name}</h4>\
+           <button  link="${z.url}" class="btn btn-info " id="b2">Play</button> 
+          </div>`
+
+        $('#result')
+        .append(str)
+        str="";
+
+            
+   }
+
+
+      })
+
+
 })
 
 
