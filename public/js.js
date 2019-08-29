@@ -131,9 +131,19 @@ $(document).on('click','#b2-videoplayer' ,((ev)=>{
 
 
 $("#getHistory").click(()=>{
-
+      $('#result').empty()
       $.get('/getHistory',(res)=>{
-             console.log(res)
+            res.reverse();
+            for(z of res)
+            {
+                      $('#result').append(`  <div class="card" id="card" >\
+                      <img class="card-img-top" id="cardimg" src="${z.image}">\
+                      <div class="card-body">\
+                        <h4 class="card-title">${z.name}</h4>\
+                       <button  link="${z.url}" class="btn btn-info " id="b2">Play</button> \
+                      </div>`
+                      )
+            }
  })
 
 
