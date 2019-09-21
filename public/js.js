@@ -1,12 +1,25 @@
 $(()=>{
-     if(window.localStorage.user!=null) 
+
+
+     $("#username").click(()=>{
+      let person = prompt("Please enter Username");
+      $.get('/createdatabase',person,(res)=>{
+            console.log(res)
+          })
+          window.localStorage.user=person;
+     })
+     
+
+
+     if(window.localStorage.user!="null") 
       {
       $("#not_user").hide()
       $("#user").show() 
     }
     else {   
-   let person;
-   person = prompt("Please enter Username");
+      $("#not_user").show()
+      $("#user").hide() 
+  let person = prompt("Please enter Username");
   $.get('/createdatabase',person,(res)=>{
         console.log(res)
       })
