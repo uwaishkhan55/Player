@@ -4,50 +4,61 @@ var cookieParser = require('cookie-parser')
 app.use(express.urlencoded());
 app.use(express.json());
 const port = process.env.PORT || 3000
-const {db,Guest,History} =require('./db')
 app.use(cookieParser());
-
-// set a cookie
-app.use( function (req, res, next) {
-  // check if client sent cookie
-  var cookie = req.cookies.cookieName;
-  if (cookie === undefined)
-  {
-    var randomNumber=Math.random().toString().substring(2,12)
-    res.cookie('cookieName',randomNumber, { maxAge:7*24*60*60*1000,  httpOnly: true });
-    let item=Guest.create({
-         id:"Guest"+randomNumber.substring(0,5)
-    })
-  } 
-  else
-  {
-    console.log('cookie exists', cookie);
-  } 
-  next(); 
-});
-
-
+const {db,User,Songs,History,Likes}=require('./test')
 app.use(express.static(__dirname + '/public'))
 var search = require('scrape-youtube');
 const fs = require('fs');
 const ytdl = require('ytdl-core');
 
 
+
 app.get('/getHistory',async (req,res)=>{
-  let guestId=""
-  if(req.cookies.cookieName){
-     guestId="Guest"+ req.cookies.cookieName.toString().substring(0,5)
-  }
- 
-        let item=await History.findAll({
-          where:{
-            guest_id: guestId
-          }
-        })
-        console.log(item)
-        res.send(item)
-  
+  let item = await User.findOne({
+    where:{
+        Name:req.cookies.username
+    }
 })
+   console.log(item)
+   let userId = item.id;
+    item = await History.findAll({
+    include:[{
+        model:Songs
+    }],
+    where:{
+         userId:userId
+    }
+
+})
+console.log(item)
+  res.send(item)
+
+ })
+
+ app.get('/getplaylist',async (req,res)=>{
+  let user= req.url.split('?')[1]
+  })
+
+  app.get('/getLiked',async (req,res)=>{
+    let item = await User.findOne({
+      where:{
+          Name:req.cookies.username
+      }
+  })
+     console.log(item)
+     let userId = item.id;
+      item = await Likes.findAll({
+      include:[{
+          model:Songs
+      }],
+      where:{
+           userId:userId
+      }
+  
+  })
+  console.log(item)
+    res.send(item)
+    })
 
 
 
@@ -62,37 +73,154 @@ app.get('/getHistory',async (req,res)=>{
 
 
 
-app.get('/download',async(req,res)=>{
+app.get('/download',(req,res)=>{
   let url='www.youtube.com/watch?v='+req.url.split('=')[1];
- ytdl.getInfo(url,  ( async(err,res1)=>{
-    let res3=await res1; 
-    let guestId=""
-    if(req.cookies.cookieName){
-       guestId="Guest"+ req.cookies.cookieName.toString().substring(0,5)
-    }   
-           fill(res1,guestId);
-           res.send(res1);
-     }))
-})
-  async function fill(res3,guestId ){
-      let name = await  res3.player_response.videoDetails.title;
-      let url = await res3.video_url;
-      let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
-     let item1 =await History.destroy({
-        where:{
-          url:url
-        }
+ ytdl.getInfo(url,  async(err,res1)=>{
+   
+    let res3= res1;
+    let item = await User.findOne({
+      where:{
+          Name:req.cookies.username
+      }
    })
-      
+  let UserId=item.id;
+  
+  let name = await  res3.player_response.videoDetails.title;
+  let url = await res3.video_url;
+  let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+
+
+  let item2 = await Songs.findAll({
+    where:{
+        name:name
+    }
+})
+ 
+if(item2.length==0)
+{
+  let item1=await Songs.create({
+    name:name,
+    url:url,
+    thumbnail:thumbnail
+})
+
+  let item3 = await History.create({
+        userId:UserId,
+        songId:item1[0].id
+  })
+}else{
+  let item5 = await History.destroy({
+    where:{
+         userId:UserId,
+         songId:item2[0].id
+    }
+  })
+  let item3 = await History.create({
+    userId:UserId,
+    songId:item2[0].id
+})
+}
+
+
+           res.send(res1);
+     })
+})
+
+
+
+
+ app.get('/createdatabase',async (req,res)=>{
+       
+         console.log(req.url.split('?')[1]);
+         let  para=req.url.split('?')[1];
+         let item=await User.findAll({
+           where:{
+             Name:para
+            }
+         })
+         if(item.length==1)
+         {
+          res.cookie('username',para)
+          console.log('old  User')
+              res.sendStatus(200)
+         }
+         else
+         {
+          res.cookie('username',para)
+               let item = User.create({Name:para})
+               console.log('New User')
+               res.sendStatus(200)
+         }
+         
+       
+ })
+
+
+
+ app.get('getlikedvideos',(req,res)=>{
+          
+ })
+
+
+ app.get('/userlikevideo',async(req,res)=>{
+       let url="https://www."+req.url.split('userlikevideo?')[1].split('//')[1];
+       let item9 = await Songs.findOne({
+         where:{
+          url:url
+         }
+       
+       })
+
+
+       let item = await User.findOne({
+        where:{
+            Name:req.cookies.username
+        }
     
-      let item = await History.create({
-             guest_id:guestId,
-              name:name,
-              url:url,
-              image:thumbnail
+    })
+
+    let UserId=item.id;
+
+
+       if(!item9){
+        console.log("start")
+        ytdl.getInfo(url, async(err,res1)=>{
+          let res3=await res1; 
+          
+        let name = await  res3.player_response.videoDetails.title;
+        let url = await res3.video_url;
+        let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+        let item1=await Songs.create({
+          name:name,
+          url:url,
+          thumbnail:thumbnail
       })
-     
- }
+      })
+   }
+   var item6 = await Songs.findOne({
+     where:{
+           url:url
+     }
+    
+  })
+
+    console.log("_________"+item6)
+    let songId=item6.id
+    let userId=UserId;
+   console.log("---------"+songId+"_______"+userId)
+
+        item=Likes.destroy({
+         where:{
+           userId:userId,
+             songId:songId
+         }
+       })
+
+       item=await Likes.create({
+        userId:userId,
+        songId:songId
+       })
+ })
 
  
  

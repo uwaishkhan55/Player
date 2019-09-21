@@ -1,44 +1,20 @@
-const Sequelize = require('sequelize')
-
-const db = new Sequelize({
-  dialect: 'sqlite',
-  retry: {
-    max: 10
-  },
-  storage: __dirname+'/tests.db',
-})
-
-
-const User = db.define('user', {
-  username:Sequelize.STRING(20),
-  fullname:Sequelize.STRING(20),
-  password:Sequelize.STRING(20),
-  email:Sequelize.STRING(20),
-})
-
-const History = db.define('history',{
-      guest_id:Sequelize.STRING(),
-      url:Sequelize.STRING(),
-      image:Sequelize.STRING(),
-      name:Sequelize.STRING()
-      
-      
-})
-const Guest = db.define('guest', {
-  id:{
-    type: Sequelize.STRING,
-    primaryKey: true,
+const mysql = require('mysql2');
+const db = mysql.createConnection({
+  host: 'remotemysql.com',
+  user: '1WIGEltyb9',
+  password: 'upLN6KnXla'
+ 
+});
+db.connect();
+db.query(`CREATE TABLE IF NOT EXISTS contacts(id NUMBER, name VARCHAR2(50), email VARCHAR2(100) )`
+  ,
+  function(err) {
+  if(err){
+      console.log(err.stack);
   }
-})
-Guest.hasMany(History,{foreignKey: 'customer_id'});
+  }
+);
+db.end();
 
 
 
-
-db.sync(()=>
-{
-    console.log('working fine')
-})
-module.exports = {
-db,History,Guest,User
-}
