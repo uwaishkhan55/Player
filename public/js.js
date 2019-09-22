@@ -1,6 +1,6 @@
 $(()=>{
 
-
+      
      $("#username").click(()=>{
       let person = prompt("Please enter Username");
       $.get('/createdatabase',person,(res)=>{
@@ -10,8 +10,8 @@ $(()=>{
      })
      
 
-
-     if(window.localStorage.user!="null") 
+      console.log(document.cookie)
+     if(window.localStorage.username!="null"&&!document.cookie=="") 
       {
       $("#not_user").hide()
       $("#user").show() 
@@ -23,7 +23,7 @@ $(()=>{
   $.get('/createdatabase',person,(res)=>{
         console.log(res)
       })
-      window.localStorage.user=person;
+      window.localStorage.username=person;
     }
 
     function myFunction(x) {
@@ -39,7 +39,7 @@ $(()=>{
       <img class="card-img-top" id="cardimg" src="${z.thumbnail}">\
       <div class="card-body">\
         <h4 class="card-title">${z.title}</h4>\
-       <button  link="${z.link}" class="btn btn-info " id="b2">Play</button> \
+       <button  link="${z.link}" class="btn btn-info " id="b2">Play <i class="fas fa-list-music"></i></button> \
        <i id="icon"  link="${z.link}"  class="fa fa-thumbs-up"></i>\
       </div>
       `
@@ -138,7 +138,7 @@ $('#getTrending').click(()=>{
           $('#video-player').empty().hide()
 
           $('#player').empty().show().append(`
-          <audio id="b2" style="width:95% ;height:50px" download="mp3.mp3" autoplay="autoplay" controls>
+          <audio id="audio" style="width:95% ;height:50px" download="mp3.mp3" autoplay="autoplay"  controls>
           <source src=${mp3} type="audio/ogg">
           Your browser does not support the audio element.
            </audio> 
@@ -164,14 +164,14 @@ $(document).on('click','#b2-videoplayer' ,((ev)=>{
 $("#getLikes").click(()=>{
   $('#result').empty()
   $.get('/getLiked',(res)=>{
-
+    res.reverse()
         for(z of res)
         {
                   $('#result').append(`  <div class="card" id="card" >\
                   <img class="card-img-top" id="cardimg" src="${z.song.thumbnail}">\
                   <div class="card-body">\
                     <h4 class="card-title">${z.song.name}</h4>\
-                   <button  link="${z.song.url}" class="btn btn-info " id="b2">Play</button> \
+                   <button  link="${z.song.url}" class="btn btn-info " id="b2">Play \<i class="fas fa-list-music"></i></button> \
                   
                   </div>
                   
@@ -182,11 +182,11 @@ $("#getLikes").click(()=>{
 })
 
 
-
+//when history click by user
 $("#getHistory").click(()=>{
       $('#result').empty()
       $.get('/getHistory',(res)=>{
-  
+        res.reverse()
             for(z of res)
             {
                       $('#result').append(`  <div class="card" id="card" >\
@@ -201,11 +201,11 @@ $("#getHistory").click(()=>{
                       )
             }
  })
-
-
-        
-
 })
+ // when user wants his playlist
+
+
+
 //store like when b2 clicked by the user
 $(document).on('click','#icon' ,((ev)=>{
      console.log()

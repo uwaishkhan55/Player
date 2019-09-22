@@ -75,7 +75,7 @@ console.log(item)
 
 app.get('/download',(req,res)=>{
   let url='www.youtube.com/watch?v='+req.url.split('=')[1];
- ytdl.getInfo(url,  async(err,res1)=>{
+ ytdl.getInfo(url,async (err,res1)=>{
    
     let res3= res1;
     let item = await User.findOne({
@@ -85,9 +85,9 @@ app.get('/download',(req,res)=>{
    })
   let UserId=item.id;
   
-  let name = await  res3.player_response.videoDetails.title;
-  let url = await res3.video_url;
-  let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+  let name =   res3.player_response.videoDetails.title;
+  let url =  res3.video_url;
+  let thumbnail= res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
 
 
   let item2 = await Songs.findAll({
@@ -184,12 +184,12 @@ if(item2.length==0)
 
        if(!item9){
         console.log("start")
-        ytdl.getInfo(url, async(err,res1)=>{
-          let res3=await res1; 
+        ytdl.getInfo(url, async(err,res3)=>{
+  
           
-        let name = await  res3.player_response.videoDetails.title;
-        let url = await res3.video_url;
-        let thumbnail=await res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+        let name =   res3.player_response.videoDetails.title;
+        let url =  res3.video_url;
+        let thumbnail= res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
         let item1=await Songs.create({
           name:name,
           url:url,
