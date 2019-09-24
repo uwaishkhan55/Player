@@ -9,6 +9,16 @@ const db = new Sequelize({
        Name: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    Email :
+    {
+      type: Sequelize.STRING,
+      allowNull:false
+    },
+    Password :
+    {
+      type: Sequelize.STRING,
+      allowNull:false
     }
 });
 const Songs = db.define('song', {

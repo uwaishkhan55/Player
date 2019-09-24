@@ -14,6 +14,8 @@ const ytdl = require('ytdl-core');
 
 
 app.get('/getHistory',async (req,res)=>{
+
+
   let item = await User.findOne({
     where:{
         Name:req.cookies.username
@@ -76,13 +78,19 @@ console.log(item)
 app.get('/download',(req,res)=>{
   let url='www.youtube.com/watch?v='+req.url.split('=')[1];
  ytdl.getInfo(url,async (err,res1)=>{
-   
-    let res3= res1;
+   console.log(req.cookies.username)
+    let res3= await res1;
+    if(req.cookies.username=='undefined') {
+      return  res.send(res3)
+    }
+    
     let item = await User.findOne({
       where:{
           Name:req.cookies.username
       }
    })
+
+   
   let UserId=item.id;
   
   let name =   res3.player_response.videoDetails.title;
@@ -129,31 +137,31 @@ if(item2.length==0)
 
 
 
- app.get('/createdatabase',async (req,res)=>{
+//  app.get('/createdatabase',async (req,res)=>{
        
-         console.log(req.url.split('?')[1]);
-         let  para=req.url.split('?')[1];
-         let item=await User.findAll({
-           where:{
-             Name:para
-            }
-         })
-         if(item.length==1)
-         {
-          res.cookie('username',para)
-          console.log('old  User')
-              res.sendStatus(200)
-         }
-         else
-         {
-          res.cookie('username',para)
-               let item = User.create({Name:para})
-               console.log('New User')
-               res.sendStatus(200)
-         }
+//          console.log(req.url.split('?')[1]);
+//          let  para=req.url.split('?')[1];
+//          let item=await User.findAll({
+//            where:{
+//              Name:para
+//             }
+//          })
+//          if(item.length==1)
+//          {
+//           res.cookie('username',para,{maxAge: 7*24*60*60*1000})
+//           console.log('old  User')
+//               res.sendStatus(200)
+//          }
+//          else
+//          {
+//           res.cookie('username',para)
+//                let item = User.create({Name:para})
+//                console.log('New User')
+//                res.sendStatus(200)
+//          }
          
        
- })
+//  })
 
 
 
@@ -178,7 +186,7 @@ if(item2.length==0)
         }
     
     })
-
+  console.log(req.cookies.username)
     let UserId=item.id;
 
 
@@ -222,6 +230,44 @@ if(item2.length==0)
        })
  })
 
+
+
+ app.post('/signup',(req,res)=>{
+  User.create({
+    Name: req.body.username,
+    Email: req.body.email,
+    Password: req.body.password
+  }).then((user) => {
+    res.redirect('/login.html')
+  }).catch((err) => {
+      res.redirect('/singup.html')
+  })
+ })
+ app.post('/login',async (req,res)=>{
+      console.log(req.body.email+"====="
+        +req.body.password)
+        let item = await User.findOne({
+              where:{
+                     Name:req.body.username,
+                     Password:req.body.password
+              }
+        })
+        console.log(item)
+        if(item){
+          res.cookie('username',req.body.username,{maxAge: 7*24*60*60*1000});  
+          res.redirect('/index.html') 
+        }else{
+             res.redirect('/login.html')
+        }
+})
+
+
+//logout path is here
+
+app.post('/logout',(req,res)=>{
+  res.clearCookie("username");
+  res.redirect('/index.html')
+})
  
  
 console.log(port)

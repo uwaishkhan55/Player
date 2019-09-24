@@ -1,7 +1,9 @@
-function u(){
-    function z(){
-        console.log("hello")
+const {User,Songs }=require('./test')
+let item = User.findAll({
+    where:{
+        
     }
-}
-u().z()
+}).then(()=>{
+    console.log(item[0])
+})
 

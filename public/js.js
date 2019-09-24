@@ -1,29 +1,15 @@
 $(()=>{
-
-      
-     $("#username").click(()=>{
-      let person = prompt("Please enter Username");
-      $.get('/createdatabase',person,(res)=>{
-            console.log(res)
-          })
-          window.localStorage.user=person;
-     })
-     
-
-      console.log(document.cookie)
-     if(window.localStorage.username!="null"&&!document.cookie=="") 
+  console.log(document.cookie.username)
+     if(document.cookie==""|| document.cookie.username==="undefined") 
       {
-      $("#not_user").hide()
-      $("#user").show() 
+        console.log("document.cookie.username")
+        $("#notuser").show()
+        $("#user").hide() 
     }
     else {   
-      $("#not_user").show()
-      $("#user").hide() 
-  let person = prompt("Please enter Username");
-  $.get('/createdatabase',person,(res)=>{
-        console.log(res)
-      })
-      window.localStorage.username=person;
+      console.log("user")
+      $("#notuser").hide()
+      $("#user").show() 
     }
 
     function myFunction(x) {
@@ -111,13 +97,7 @@ $('#getTrending').click(()=>{
        $(this).css("background-color", "yellow");
        $.get('/download',$(this).attr('link'),async (x)=>{
          x=await x;
-         console.log(x.formats[0].url+"vdgsvdgss")
-         if(!x){
-          $("#b2").click()
-         }  
-         
-        
-         let mp3;
+          let mp3;
         
         let arrayofmp3 =x.formats.reverse()
         arrayofmp3.forEach(element => {  
@@ -203,6 +183,8 @@ $("#getHistory").click(()=>{
  })
 })
  // when user wants his playlist
+
+// logout by destroying cookie save in user system
 
 
 
