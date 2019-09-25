@@ -78,59 +78,64 @@ console.log(item)
 app.get('/download',(req,res)=>{
   let url='www.youtube.com/watch?v='+req.url.split('=')[1];
  ytdl.getInfo(url,async (err,res1)=>{
-   console.log(req.cookies.username)
     let res3= await res1;
-    if(req.cookies.username=='undefined') {
-      return  res.send(res3)
-    }
-    
-    let item = await User.findOne({
-      where:{
-          Name:req.cookies.username
-      }
-   })
-
-   
-  let UserId=item.id;
-  
-  let name =   res3.player_response.videoDetails.title;
-  let url =  res3.video_url;
-  let thumbnail= res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
-
-
-  let item2 = await Songs.findAll({
-    where:{
-        name:name
-    }
+    setTimeout((async()=>{
+      if(typeof req.cookies.username=="undefined"){
+        console.log(typeof(req.cookies))
+        res.send(res3)
+}
+else{
+let item = await User.findOne({
+  where:{
+      Name:req.cookies.username
+  }
 })
- 
+
+
+let UserId=item.id;
+
+let name =   res3.player_response.videoDetails.title;
+let url =  res3.video_url;
+let thumbnail= res3.player_response.videoDetails.thumbnail.thumbnails[0].url||"";
+
+
+let item2 = await Songs.findAll({
+where:{
+    name:name
+}
+})
+
 if(item2.length==0)
 {
-  let item1=await Songs.create({
-    name:name,
-    url:url,
-    thumbnail:thumbnail
+let item1=await Songs.create({
+name:name,
+url:url,
+thumbnail:thumbnail
 })
 
-  let item3 = await History.create({
-        userId:UserId,
-        songId:item1[0].id
-  })
-}else{
-  let item5 = await History.destroy({
-    where:{
-         userId:UserId,
-         songId:item2[0].id
-    }
-  })
-  let item3 = await History.create({
+let item3 = await History.create({
     userId:UserId,
-    songId:item2[0].id
+    songId:item1[0].id
+})
+}else{
+let item5 = await History.destroy({
+where:{
+     userId:UserId,
+     songId:item2[0].id
+}
+})
+let item3 = await History.create({
+userId:UserId,
+songId:item2[0].id
 })
 }
 
 
-           res.send(res1);
+       res.send(res1);
+}
+    }), 1000);
+  
+    
      })
 })
 
