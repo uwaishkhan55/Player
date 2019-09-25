@@ -8,7 +8,8 @@ const db = new Sequelize({
     // attributes
        Name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      
     },
     Email :
     {
