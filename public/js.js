@@ -186,7 +186,11 @@ $("#getHistory").click(()=>{
 
 // logout by destroying cookie save in user system
 
-
+$('#logout').click(()=>{
+    $.post('/logout',{},(res)=>{
+       location.reload();
+    })
+})
 
 //store like when b2 clicked by the user
 $(document).on('click','#icon' ,((ev)=>{

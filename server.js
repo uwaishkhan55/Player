@@ -244,7 +244,7 @@ if(item2.length==0)
   })
  })
  app.post('/login',async (req,res)=>{
-      console.log(req.body.email+"====="
+      console.log(req.body.username+"====="
         +req.body.password)
         let item = await User.findOne({
               where:{
