@@ -1,5 +1,5 @@
 $(()=>{
-  console.log(document.cookie.username)
+  // console.log(document.cookie.username)
      if(document.cookie==""|| document.cookie.username==="undefined") 
       {
         console.log("document.cookie.username")
@@ -104,18 +104,20 @@ $('#getTrending').click(()=>{
             if(element.audioBitrate===160||element.audioBitrate===64||element.audioBitrate===128) {
               
               mp3=element.url;
-              
+              console.log(mp3)
             }
          });
-         let mp4=x.formats[0].url || 0;
-         $(this).parent().find('a').empty()
-           $(this).parent()
-          .append(`\ 
+         console.log(x.formats)
+         //>>>>>>>>>>>>>>>>>>>>>-------------Some video formats not working -------------------<<<<<<<<<<<<<<<<<<<<<<
+        //  let mp4=x.formats[0].url || 0;
+        //  $(this).parent().find('a').empty()
+        //    $(this).parent()
+        //   .append(`\ 
 
-         <a><button id="b2-videoplayer" link="${mp4}" class="btn btn-primary">HD 480P</button></a>
+        //  <a><button id="b2-videoplayer" link="${mp4}" class="btn btn-primary">HD 480P</button></a>
          
-          `)
-          $('#video-player').empty().hide()
+        //   `)
+        //   $('#video-player').empty().hide()
 
           $('#player').empty().show().append(`
           <audio id="audio" style="width:95% ;height:50px" download="mp3.mp3" autoplay="autoplay"  controls>
