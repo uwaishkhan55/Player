@@ -4,7 +4,7 @@ Download and Play youtube content without using youtube API (WEB SCRAPPING).
 
 Here is a working live demo : https://innovaccerassignment.herokuapp.com/
 
-# Some Screenshot's
+# Some Screenshot
 - Homepage
 ![Screenshot (35)](https://user-images.githubusercontent.com/49112789/69884661-6e9d8980-12ff-11ea-8580-08ad98af3f29.png)
 - Audio Playing Demo
