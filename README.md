@@ -13,6 +13,9 @@ Here is a working live demo : https://musicplayerv2.herokuapp.com/
 ![Screenshot (37)](https://user-images.githubusercontent.com/49112789/69884694-9856b080-12ff-11ea-8687-b082db308f20.png)
 - Login Page
 ![Screenshot (38)](https://user-images.githubusercontent.com/49112789/69884708-ac021700-12ff-11ea-9fbb-63ce08da37fe.png)
+- Menu 
+![Screenshot (39)](https://user-images.githubusercontent.com/49112789/69888301-166f8300-1311-11ea-81e3-7a213fb3a521.png)
+
 
 
 
